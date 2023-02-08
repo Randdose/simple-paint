@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<!--<script src="https://kit.fontawesome.com/aa32570a68.js" crossorigin="anonymous"></script>-->
+        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="../global.css" type="text/css" media="all" />
+        <script defer src="script.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	
+	<body>
+		<div id="bar_container">
+			<div id="left-bar" class="content bar">
+				<div class="button bar_button" id="import">
+					<img src="../assets/svgs/img.svg" class="option-button_icon"></label>
+				</div>
+				<div class="button bar_button" onclick="clearBoard()">
+					<img src="../assets/svgs/bigBrush.svg">
+				</div>
+			</div>
+
+			<div id="tool-bar" class="content bar">
+				<div class="option-button selected" id="brush">
+					<img src="../assets/svgs/brush.svg" class="option-button_icon"></label>
+				</div>
+
+				<div class="option-button" id="eraser">
+					<img src="../assets/svgs/eraser.svg" class="option-button_icon"></label>
+				</div>
+
+				<div class="option-button" id="colorPicker">
+					<img src="../assets/svgs/dropper.svg" class="option-button_icon"></label>
+				</div>
+
+				<div class="option-button" id="shape">
+					<img src="../assets/svgs/shapes.svg" class="option-button_icon"></label>
+				</div>
+
+				<div class="option-button" id="text">
+					<img src="../assets/svgs/text.svg" class="option-button_icon"></label>
+				</div>
+
+				<div class="option-button" id="selection">
+					<img src="../assets/svgs/select-rect.svg" class="option-button_icon"></label>
+				</div>
+			</div>
+
+			<div id="right-bar" class="content bar">
+				<div class="button bar_button">
+					<img src="../assets/svgs/cog.svg">
+				</div>
+				<div class="button bar_button">
+					<img src="../assets/svgs/floppy.svg">
+				</div>
+			</div>
+		</div>
+
+		<div class="content" id="board_wrapper">
+			<canvas id="effect-board" width="1200" height="450"></canvas>
+			<canvas id="board" width="1200" height="450"></canvas>
+		</div>
+
+		<div id="dialogue">
+			<iframe src="../assets/dialogues/saveDialogue.html">
+
+			</iframe>
+		</div>
+
+	</body>
+	
+</html>

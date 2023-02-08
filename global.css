@@ -1,0 +1,153 @@
+:root{
+	--main: #F77067;
+	--sec: #F79467;
+	--transp: rgba(247, 112, 103, 0.65);
+	--back: #2C3746;
+	--for: #EFF0F1;
+	--inact: #46505D;
+}
+
+*{
+	user-select: none;
+	font-family: sans-serif;
+}
+
+body{
+	background: var(--back);
+	margin: 0px;
+	padding: 15px;
+
+	box-sizing: border-box;
+
+	width: 100%;
+	height: 100vh;
+}
+
+#dialogue{
+	position: fixed;
+	width: 60%;
+	height: 70%;
+
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+#dialogue iframe{
+	width: 100%;
+	height: 100%;
+}
+
+.bar fieldset{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+
+	padding: 0;
+	margin: 0;
+
+	width: fit-content;
+	border: 0;
+}
+
+.button,
+.bar_button,
+.option-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 1.5px var(--inact) solid;
+	border-radius: 10px;
+
+	font-family: sans-serif;
+	font-size: 3rem;
+
+	aspect-ratio: 3/1;
+	cursor: pointer;
+
+	transition: background 250ms, border 250ms;
+}
+
+.button:hover,
+.option-button:hover{
+	border: 1.5px var(--sec) solid;
+}
+
+.button:active,
+.option-button:active,
+.option-button.selected{
+	border: 1.5px var(--main) solid;
+	background: var(--transp);
+}
+
+.content{
+	border: 1.5px var(--main) solid;
+	border-radius: 6px;
+
+	color: var(--for);
+}
+
+.side-panel{
+	width: 15%;
+	height: 100%;
+
+	overflow: scroll;
+}
+
+.option{
+	height: 18px;
+	padding: 4px;
+
+	font-size: 1rem;
+}
+
+.option:hover{
+	background: var(--transp);
+}
+
+.option[selected="true"]{
+	background: var(--main);
+}
+
+.option-button{
+
+}
+
+.bar{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	padding: 5px;
+}
+
+.bar_button,
+.option-button{
+	width: 40px;
+	aspect-ratio: 1;
+
+	border-radius: 5px;
+
+	margin-left: 5px;
+}
+
+.bar_button:first-child,
+.option-button:first-child{
+	margin: 0;
+}
+
+a img{
+	width: 42px;
+	aspect-ratio: 1;
+}
+
+img{
+	width: 22px;
+	aspect-ratio: 1;
+	cursor: inherit;
+
+	pointer-events: none;
+}

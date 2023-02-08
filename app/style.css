@@ -1,0 +1,39 @@
+body{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+	padding: 0 0 15px 0 !important;
+}
+
+#bar_container{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+}
+
+.tool-bar_tool{
+	visibility: collapse;
+}
+
+#board_wrapper{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 95%;
+	height: calc(100% - 74px);
+
+	overflow: scroll;
+}
+
+#board{
+	background: white;
+}
+
+#effect-board{
+	position: absolute;
+}

@@ -1,0 +1,26 @@
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+.content{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+}
+
+#centered{
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 20%;
+
+	width: calc(420px * 2 + 20%);
+	height: calc((420px / 3) * 2 + 20%);
+}
+
+.big-button{
+	width: 420px;
+}
