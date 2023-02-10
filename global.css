@@ -12,7 +12,8 @@
 	font-family: sans-serif;
 }
 
-body{
+body,
+.inner-body{
 	background: var(--back);
 	margin: 0px;
 	padding: 15px;
@@ -21,6 +22,27 @@ body{
 
 	width: 100%;
 	height: 100vh;
+}
+
+#dialogue-container{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: collapse;
+}
+
+#dialogue-background{
+	position: absolute;
+
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	height: 100%;
+
+	transform: translate(-50%, -50%);
+
+	background: rgb(0, 0, 0, 0.3);
+	backdrop-filter: blur(3px);
 }
 
 #dialogue{
@@ -33,7 +55,7 @@ body{
 	transform: translate(-50%, -50%);
 
 	border-radius: 10px;
-	overflow: hidden;
+	overflow: scroll;
 }
 
 #dialogue iframe{

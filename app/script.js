@@ -1,9 +1,9 @@
 const toolBar = document.querySelector("#tool-bar")
 let tool = "brush";
 
+// adds click handler to all tools. the click handler applies the class "selected" to the clicked tool, and changes the variable "tool" to it's Id
 toolBar.querySelectorAll(".option-button").forEach(e => {
 	e.onclick = () => {
-		console.log(e);
 		e.parentElement.querySelector(".selected").classList.remove("selected");
 		e.classList.add("selected");
 		tool = e.id
@@ -33,6 +33,31 @@ let endX;
 let endY;
 
 let isDown = false;
+
+//dialogue
+const dial = document.querySelector("#dialogue")
+
+// shows specified dialogue, cannot show more than one at a time
+function showDialogue(dialogue){
+	//dial.querySelector("#dialogue_content").src = `../assets/dialogues/${dialogue}Dialogue.html`
+	dial.parentElement.style.visibility = 'visible'
+}
+
+//hides the dialogue
+function hideDialogue(){
+	dial.parentElement.style.visibility = 'collapse'
+}
+
+function updatePreview(){
+	dial.querySelector("iframe").src = saveFrame();
+}
+
+function download(){
+	var saveButton = document.createElement('a');
+	saveButton.href = saveFrame();
+	saveButton.download = 'image.png';
+	saveButton.click();
+}
 
 //drawing settings called 'tweaks'
 let tweaks = {

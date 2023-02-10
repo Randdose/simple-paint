@@ -51,7 +51,7 @@
 				<div class="button bar_button">
 					<img src="../assets/svgs/cog.svg">
 				</div>
-				<div class="button bar_button">
+				<div onclick="download()" class="button bar_button">
 					<img src="../assets/svgs/floppy.svg">
 				</div>
 			</div>
@@ -62,12 +62,25 @@
 			<canvas id="board" width="1200" height="450"></canvas>
 		</div>
 
-		<div id="dialogue">
-			<iframe src="../assets/dialogues/saveDialogue.html">
+		<div id="dialogue-container">
 
-			</iframe>
+			<div id="dialogue-background" onclick="hideDialogue()">
+
+			</div>
+
+			<div id="dialogue" class="inner-body">
+				<div class="content" id="preview-wrapper">
+					<iframe src="" allow-same-origin="true" id="preview" onclick="updatePreview()"></iframe>
+				</div>
+
+				<select name="img-type">
+					<option value="png">PNG</option>
+					<option value="jpg">JPG</option>
+				</select>
+				<!--<iframe id="dialogue_content" src="../assets/dialogues/saveDialogue.html">
+				</iframe>-->
+			</div>
 		</div>
-
 	</body>
 	
 </html>
