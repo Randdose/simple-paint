@@ -1,0 +1,9 @@
+{
+	"appearance":[
+		{
+			"theme": "breeze",
+			"accent": "dark",
+			"defaultBoardColor": "black"
+		}
+	]
+}

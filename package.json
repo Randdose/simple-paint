@@ -1,0 +1,25 @@
+{
+  "name": "simple-paint",
+  "version": "0.0.1",
+  "description": "simple painting electron app which can be used for illustration, explaining, small sketchs, and more.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --ozone-platform=wayland"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Randdose/simple-paint.git"
+  },
+  "keywords": [
+    "plasma-themed",
+    "paint",
+    "sketch",
+    "illustrate"
+  ],
+  "author": "Randdose",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Randdose/simple-paint/issues"
+  },
+  "homepage": "https://github.com/Randdose/simple-paint#readme"
+}
