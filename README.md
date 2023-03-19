@@ -11,5 +11,6 @@ currently you cannot install this as an app, but it can be used inside a web bro
 first install the zip file, extract it into any directory, and open "index.html" using your browser of choice. (best experience on firefox and it's derivatives).
 
 # Testing (Electron)
-install the zip file, navigate to it in a terminal, and run `npm start`.
+install the zip file, extract its content, navigate to the directory you extracted in a terminal, and run `npm start`.
+
 currently may only work under Wayland
