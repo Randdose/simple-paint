@@ -1,33 +1,34 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+// import browser, and app from electron, and import path from path.
+const {app, BrowserWindow} = require('electron');
+const path = require('path');
 
-function createWindow(){
+// creates a window basically
+function createWindow(width, height, htmlPath, preloadPath){
+
 	const win = new BrowserWindow({
+		width: width,
+		height: height,
+		autoHideMenuBar: true,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			nodeIntegration: true,
+			preload: preloadPath
 		}
-	})
+	});
 
-	win.loadFile('index.html')
+	win.loadFile(htmlPath);
+	console.log(preloadPath)
 }
 
 app.whenReady().then(() => {
 
-	let mainWindow = null;
-
-	const {screen} = require('electron');
+	const{screen} = require('electron');
 
 	const primaryDisplay = screen.getPrimaryDisplay();
+	const factor = screen.getPrimaryDisplay().scaleFactor;
 	const {width, height} = primaryDisplay.workAreaSize;
 
-	document.write(width, height)
+	createWindow(width/factor, height/factor, 'index.html', path.join(__dirname, 'preload.js'));
 
-	mainWindow = new BrowserWindow({width, height});
-	mainWindow.loadFile('index.html');
-})
+	console.log(primaryDisplay);
 
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
-		app.quit()
-	}
-})
+});

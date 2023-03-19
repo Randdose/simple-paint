@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style.css" type="text/css" media="all" />
         <link rel="stylesheet" href="../global.css" type="text/css" media="all" />
         <script defer src="script.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="../script.js" type="text/javascript" charset="utf-8"></script>-->
 		
 	</head>
 	
@@ -51,7 +52,7 @@
 				<div class="button bar_button">
 					<img src="../assets/svgs/cog.svg">
 				</div>
-				<div onclick="download()" class="button bar_button">
+				<div onclick="(function(){showDialogue('save'); updatePreview()})()" class="button bar_button">
 					<img src="../assets/svgs/floppy.svg">
 				</div>
 			</div>
@@ -69,16 +70,8 @@
 			</div>
 
 			<div id="dialogue" class="inner-body">
-				<div class="content" id="preview-wrapper">
-					<iframe src="" allow-same-origin="true" id="preview" onclick="updatePreview()"></iframe>
-				</div>
-
-				<select name="img-type">
-					<option value="png">PNG</option>
-					<option value="jpg">JPG</option>
-				</select>
-				<!--<iframe id="dialogue_content" src="../assets/dialogues/saveDialogue.html">
-				</iframe>-->
+				<iframe id="dialogue_content" src="../assets/dialogues/saveDialogue.html">
+				</iframe>
 			</div>
 		</div>
 	</body>

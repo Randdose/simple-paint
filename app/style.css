@@ -27,7 +27,7 @@ body{
 	width: 95%;
 	height: calc(100% - 74px);
 
-	overflow: scroll;
+	overflow: auto;
 }
 
 #board{

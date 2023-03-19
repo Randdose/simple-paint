@@ -1,7 +1,7 @@
 const toolBar = document.querySelector("#tool-bar")
 let tool = "brush";
 
-// adds click handler to all tools. the click handler applies the class "selected" to the clicked tool, and changes the variable "tool" to it's Id
+// Add click handler to all tools. the click handler applies the class "selected" to the clicked tool, and changes the variable "tool" to it's Id
 toolBar.querySelectorAll(".option-button").forEach(e => {
 	e.onclick = () => {
 		e.parentElement.querySelector(".selected").classList.remove("selected");
@@ -10,19 +10,21 @@ toolBar.querySelectorAll(".option-button").forEach(e => {
 	}
 });
 
-//drawing board
+// Drawing board constants
 const board = document.getElementById('board');
 const boardEffects = document.getElementById('effect-board');
 
 const ctx = board.getContext('2d');
 const effectCtx = boardEffects.getContext('2d');
 
+// Offset is how much the position of the board was changed by CSS from the original location
 let offsetX;
 let offsetY;
 
-let img;
+// should be deleted by release !!
+//let img;
 
-//mouse position
+// Mouse position, and variables
 let currX;
 let currY;
 
@@ -34,32 +36,32 @@ let endY;
 
 let isDown = false;
 
-//dialogue
+// Dialogue element
 const dial = document.querySelector("#dialogue")
 
 // shows specified dialogue, cannot show more than one at a time
 function showDialogue(dialogue){
-	//dial.querySelector("#dialogue_content").src = `../assets/dialogues/${dialogue}Dialogue.html`
+	dial.querySelector("#dialogue_content").src = `../assets/dialogues/${dialogue}/${dialogue}Dialogue.html`
 	dial.parentElement.style.visibility = 'visible'
 }
 
-//hides the dialogue
+// hides the dialogue
 function hideDialogue(){
 	dial.parentElement.style.visibility = 'collapse'
 }
 
 function updatePreview(){
-	dial.querySelector("iframe").src = saveFrame();
+	dial.querySelector('iframe').contentWindow.document.querySelector('iframe').src = saveFrame();
 }
 
 function download(){
-	var saveButton = document.createElement('a');
+	let saveButton = document.createElement('a');
 	saveButton.href = saveFrame();
 	saveButton.download = 'image.png';
 	saveButton.click();
 }
 
-//drawing settings called 'tweaks'
+// drawing settings called 'tweaks'
 let tweaks = {
 	drawWidth : 5,
 	drawColor : 'black',
@@ -84,22 +86,30 @@ let settings = {
 	
 }
 
-//saved frames array and the index at which the user is currently at
+// saved frames array and the index at which the user is currently at
 let savedFrames = [];
 let currentIndex = 0;
+
+board.onmousedown = () => {
+	savedFrames += saveFrame();
+	currentIndex++;
+}
 
 function clearBoard(){
 	ctx.clearRect(0, 0, board.width, board.height);
 }
 
 function undo(){
+	clearBoard();
 
 	img = new Image();
-	img.src = savedFrames[currentIndex-1];
-	clearBoard();
-	console.log(img);
-	ctx.drawImage(img, 0, 0);
-	currentIndex--;
+	img.src = savedFrames[currentIndex - 2]
+	currentIndex >= 1 ? currentIndex-- : currentIndex = currentIndex;
+
+	img.onload = () => {
+		//drawImage(0, 0, img, board);
+		ctx.drawImage(img, 0, 0);
+	}
 
 }
 
@@ -273,22 +283,34 @@ boardEffects.addEventListener('mouseEnter', (e) => {
 function saveFrame(type){
 	
 	//returns the board's image and if a type is NOT supplied it uses png
-	return board.toDataURL(type||'png');
+	return board.toDataURL(`image/${type}`||'png', 1.0);
 	
 }
+
+function saveData(ctx){
+
+	//returns data of the board which can be drawn onto the canvas
+	return ctx.getImageData(0,0,board.width,board.height)
+
+}
+
+// const getBlob = async (src) => {
+// 	return await (await fetch(src)).blob();
+// }
 
 function drawImage(x, y, src, cboard){
 
 	//create img element with it's source set to src
-	img = document.createElement("img");
+	img = new Image();
+	img.crossorigin = "anonymous";
 	img.src = src;
 
-	//get ctx of the current board: currentctx
 	cctx = cboard.getContext("2d");
 
 	//draw the image from x,y to the end of the canvas(board)
-	cctx.drawImage(img, x, y, cboard.width, cboard.height);
-
+	img.onload = async function () {
+		cctx.drawImage(img, x, y);
+	}
 }
 
 function getPixelColor(x, y, context){
@@ -329,16 +351,15 @@ Array.from(document.querySelectorAll('.color-board')).forEach(
 	el => el.addEventListener('mousemove', (e) => {
 		document.querySelector('#stroke-color').style.background = `rgb(${getPixelColor(e.offsetX, e.offsetY, colorPicker_ctx)})`;
 }));
+*/
 
 //document shortcuts
 document.addEventListener('keydown', e => {
 	
 	if(e.ctrlKey){
+		console.log(e);
+
 		switch(e.key){
-			case 'H' :
-				toolbar.classList.toggle('hidden-bar');
-				break;
-				
 			case 'z' :
 				undo();
 				break;
@@ -350,4 +371,4 @@ document.addEventListener('keydown', e => {
 	}
 	else{console.log('else')}
 	console.log(e);
-});*/
+});

@@ -1,0 +1,27 @@
+#preview-wrapper{
+	display: flex;
+	justify-content: center;
+
+	width: 100%;
+	height: 90%;
+
+	margin-bottom: 20px;
+}
+
+#preview{
+	width: 100%;
+	height: 100%;
+
+	border-width: 0;
+}
+
+#button-set{
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+}
+
+#button-set *{
+	margin-right: 5px;
+}

@@ -4,8 +4,12 @@
   "description": "simple painting electron app which can be used for illustration, explaining, small sketchs, and more.",
   "main": "main.js",
   "scripts": {
-    "start": "electron . --ozone-platform=wayland"
+    "start": "electron . --ozone-platform=wayland",
+    "test": "electron . --ozone-platform=wayland --trace-warnings"
   },
+  "extraResources": [
+    "./preload.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Randdose/simple-paint.git"

@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+	<head>
+        <link rel="stylesheet" href="../../../global.css" type="text/css" media="all" />
+        <script defer src="../../../app/script.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="save.css" ype="text/css">
+	</head>
+
+	<body>
+
+		<div class="content" id="preview-wrapper" onclick="updatePreview()">
+			<iframe src="" allow-same-origin="true" id="preview" onclick="updatePreview()">
+			</iframe>
+		</div>
+
+		<div id="button-set">
+			<select name="img-type">
+				<option value="png">PNG</option>
+				<option value="jpg">JPG</option>
+			</select>
+
+			<div class="button small-button" id="download">Download</div>
+		</div>
+	</body>
+
+</html>
