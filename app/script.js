@@ -21,10 +21,6 @@ const effectCtx = boardEffects.getContext('2d');
 let offsetX;
 let offsetY;
 
-// should be deleted by release !!
-//let img;
-
-// Mouse position, and variables
 let currX;
 let currY;
 
@@ -88,11 +84,14 @@ let settings = {
 
 // saved frames array and the index at which the user is currently at
 let savedFrames = [];
-let currentIndex = 0;
+let currentIndex = -1;
+
+board.onmouseup = () => {
+	currentIndex++;
+	savedFrames += saveFrame();
+}
 
 board.onmousedown = () => {
-	savedFrames += saveFrame();
-	currentIndex++;
 }
 
 function clearBoard(){
@@ -100,28 +99,30 @@ function clearBoard(){
 }
 
 function undo(){
+
 	clearBoard();
 
 	img = new Image();
-	img.src = savedFrames[currentIndex - 2]
-	currentIndex >= 1 ? currentIndex-- : currentIndex = currentIndex;
+	img.src = savedFrames[currentIndex - 1]
+	currentIndex >= 0 ? currentIndex-- : currentIndex = currentIndex;
 
 	img.onload = () => {
-		//drawImage(0, 0, img, board);
-		ctx.drawImage(img, 0, 0);
+		drawImage(0, 0, img, board);
+		//ctx.drawImage(img, 0, 0);
 	}
 
 }
 
 function redo(){
-	
-	img = new Image();
-	img.src = savedFrames[currentIndex+1];
-	clearBoard();
-	console.log(img);
-	ctx.drawImage(img, 0, 0);
-	currentIndex++;
 
+	clearBoard();
+
+	img = new Image();
+	img.src = savedFrames[currentIndex+1]
+
+	img.onload = () => {
+		drawImage(0,0,img,board)
+	}
 }
 
 //get mouseDown for all of the page
@@ -318,40 +319,6 @@ function getPixelColor(x, y, context){
 	return `${context.getImageData(x, y, 1, 1).data[0]}, ${context.getImageData(x, y, 1, 1).data[1]}, ${context.getImageData(x, y, 1, 1).data[2]}`;
 	
 }
-
-//rest of tools
-
-//color info
-
-/*color info referes to the bg and fg color panel*/
-/*document.querySelectorAll('#color-info')[0].addEventListener('click', () => {
-	document.querySelectorAll('#color-info')[0].classList.toggle('used');
-});
-
-const shadePicker_canvas = document.querySelectorAll('#shade-picking_canvas')[0];
-const shadePicker_ctx = shadePicker_canvas.getContext('2d');
-
-const grd = shadePicker_ctx.createLinearGradient(0,0,360,0);
-grd.addColorStop(0, 'white');
-grd.addColorStop(1, 'red');
-shadePicker_ctx.fillStyle = grd;
-shadePicker_ctx.fillRect(0,0,360,25);
-
-const colorPicker_canvas = document.querySelector('#color-picking_canvas');
-const colorPicker_ctx = colorPicker_canvas.getContext('2d');
-
-const grd2 = colorPicker_ctx.createLinearGradient(0, 0, colorPicker_canvas.width, colorPicker_canvas.height);
-grd2.addColorStop(0, 'white');
-grd2.addColorStop(0.5, 'red');
-grd2.addColorStop(1, 'black');
-colorPicker_ctx.fillStyle = grd2;
-colorPicker_ctx.fillRect(0, 0, 360, 360);
-
-Array.from(document.querySelectorAll('.color-board')).forEach(
-	el => el.addEventListener('mousemove', (e) => {
-		document.querySelector('#stroke-color').style.background = `rgb(${getPixelColor(e.offsetX, e.offsetY, colorPicker_ctx)})`;
-}));
-*/
 
 //document shortcuts
 document.addEventListener('keydown', e => {
