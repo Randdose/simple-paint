@@ -21,11 +21,13 @@ const effectCtx = boardEffects.getContext('2d');
 let offsetX;
 let offsetY;
 
+// Mouse position and info
 let currX;
 let currY;
 
 let startX;
 let startY;
+let test = 0;
 
 let endX;
 let endY;
@@ -57,7 +59,7 @@ function download(){
 	saveButton.click();
 }
 
-// drawing settings called 'tweaks'
+// Drawing settings called 'tweaks'
 let tweaks = {
 	drawWidth : 5,
 	drawColor : 'black',
@@ -76,19 +78,20 @@ let effectTweaks = {
 	
 }
 
+// User settings
 let settings = {
 	
 	maxSaveFrames : 20
 	
 }
 
-// saved frames array and the index at which the user is currently at
+// Saved frames array and the index at which the user is currently at
 let savedFrames = [];
 let currentIndex = -1;
 
 board.onmouseup = () => {
 	currentIndex++;
-	savedFrames += saveFrame();
+	savedFrames += saveData();
 }
 
 board.onmousedown = () => {
@@ -154,6 +157,11 @@ const brush = {
 	
 	}
 };
+
+function random_rgba() {
+	var o = Math.round, r = Math.random, s = 255;
+	return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+}
 
 const eraser = {
 	
@@ -230,11 +238,11 @@ boardEffects.addEventListener('mousedown', (e) => {
 	
 	isDown = true;
 	
-	ctx.lineWidth = tweaks.drawWidth;
-	ctx.strokeStyle = effectCtx.strokeStyle = tweaks.drawColor;
-	ctx.fillStyle = effectCtx.fillStyle = tweaks.fillColor;
-	ctx.lineCap = effectCtx.lineCap = tweaks.tipType;
-	ctx.lineJoin = effectCtx.lineJoin = tweaks.joinType;
+	// ctx.lineWidth = tweaks.drawWidth;
+	// ctx.strokeStyle = effectCtx.strokeStyle = tweaks.drawColor;
+	// ctx.fillStyle = effectCtx.fillStyle = tweaks.fillColor;
+	// ctx.lineCap = effectCtx.lineCap = tweaks.tipType;
+	// ctx.lineJoin = effectCtx.lineJoin = tweaks.joinType;
 	
 	currX = e.offsetX;
 	currY = e.offsetY;
@@ -247,6 +255,12 @@ boardEffects.addEventListener('mousemove', (e) => {
 	
 	currX = e.offsetX;
 	currY = e.offsetY;
+
+	ctx.lineWidth = tweaks.drawWidth;
+	ctx.strokeStyle = effectCtx.strokeStyle = tweaks.drawColor;
+	ctx.fillStyle = effectCtx.fillStyle = tweaks.fillColor;
+	ctx.lineCap = effectCtx.lineCap = tweaks.tipType;
+	ctx.lineJoin = effectCtx.lineJoin = tweaks.joinType;
 	
 	eval(tool).move(e);
 	if(eval(tool).clearOnMove = true){effectCtx.clearRect(0,0,board.width,board.height)}
@@ -262,7 +276,7 @@ boardEffects.addEventListener('mouseup', (e) => {
 		savedFrames.shift()
 		currentIndex -= 1;
 	}
-	savedFrames.push(saveFrame());
+	savedFrames.push(saveData(ctx));
 	currentIndex += 1;
 
 });
@@ -288,18 +302,14 @@ function saveFrame(type){
 	
 }
 
-function saveData(ctx){
+function saveData(ctx, settings){
 
 	//returns data of the board which can be drawn onto the canvas
-	return ctx.getImageData(0,0,board.width,board.height)
+	return ctx.getImageData(0, 0, board.width, board.height, settings)
 
 }
 
-// const getBlob = async (src) => {
-// 	return await (await fetch(src)).blob();
-// }
-
-function drawImage(x, y, src, cboard){
+/*function drawImage(x, y, src, cboard){
 
 	//create img element with it's source set to src
 	img = new Image();
@@ -312,6 +322,12 @@ function drawImage(x, y, src, cboard){
 	img.onload = async function () {
 		cctx.drawImage(img, x, y);
 	}
+}*/
+
+function drawData(x, y, data, cctx){
+
+	cctx.putImageData(data, x, y);
+
 }
 
 function getPixelColor(x, y, context){
@@ -320,7 +336,7 @@ function getPixelColor(x, y, context){
 	
 }
 
-//document shortcuts
+// Document shortcuts
 document.addEventListener('keydown', e => {
 	
 	if(e.ctrlKey){
