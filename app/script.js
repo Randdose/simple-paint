@@ -89,6 +89,14 @@ let settings = {
 let savedFrames = [];
 let currentIndex = -1;
 
+// Side bar
+const rightSideBar = document.querySelector("#right-side_bar")
+
+const colorPicker = rightSideBar.querySelector(".current_color-selector")
+colorPicker.addEventListener("change", () => {
+	tweaks.drawColor = colorPicker.value
+})
+
 board.onmouseup = () => {
 	currentIndex++;
 	savedFrames += saveData();
@@ -158,11 +166,6 @@ const brush = {
 	}
 };
 
-function random_rgba() {
-	var o = Math.round, r = Math.random, s = 255;
-	return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-}
-
 const eraser = {
 	
 	down : (e) => {if(isDown){ctx.clearRect(currX - (tweaks.drawWidth/2), currY - (tweaks.drawWidth/2), tweaks.drawWidth, tweaks.drawWidth);}},
@@ -195,7 +198,7 @@ const text = {
 	
 };
 
-const colorPicker = {
+const colorDropper = {
 	
 	down : (e) => {},
 	move : (e) => {},
@@ -229,7 +232,7 @@ const select = {
 	saved_vals : {
 		mode : 'replace',
 		shape : 'rect',
-		path: new Path2D()
+		// path: new Path2D()
 	}
 
 }
