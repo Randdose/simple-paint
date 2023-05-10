@@ -30,7 +30,7 @@
 					<img src="../assets/svgs/eraser.svg" class="option-button_icon"></label>
 				</div>
 
-				<div class="option-button" id="colorPicker">
+				<div class="option-button" id="colorDropper">
 					<img src="../assets/svgs/dropper.svg" class="option-button_icon"></label>
 				</div>
 
@@ -57,9 +57,19 @@
 			</div>
 		</div>
 
-		<div class="content" id="board_wrapper">
-			<canvas id="effect-board" width="1200" height="450"></canvas>
-			<canvas id="board" width="1200" height="450"></canvas>
+		<div id="middle-part_wrapper">
+			<div class="content" id="board_wrapper">
+				<canvas id="effect-board" width="1200" height="450"></canvas>
+				<canvas id="board" width="1200" height="450"></canvas>
+			</div>
+
+			<div id="right-side_bar" class="content">
+				<div id="color-picker_wrapper" class="content">
+					<input id="bg-color_selector" class="color-picker current_color-selector" type="color">
+					<div id="switch-colors_btn" class="small-button button"><img src="../assets/svgs/switch.svg" class="option-button_icon"></div>
+					<input id="fg-color_selector" class="color-picker" type="color">
+				</div>
+			</div>
 		</div>
 
 		<div id="dialogue-container">
