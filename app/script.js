@@ -90,11 +90,11 @@ let savedFrames = [];
 let currentIndex = -1;
 
 // Side bar
-const rightSideBar = document.querySelector("#right-side_bar")
+const rightSideBar = document.querySelector("#right-side_bar");
 
-const colorPicker = rightSideBar.querySelector(".current_color-selector")
+const colorPicker = rightSideBar.querySelector(".current_color-selector");
 colorPicker.addEventListener("change", () => {
-	tweaks.drawColor = colorPicker.value
+	tweaks.drawColor = colorPicker.value;
 })
 
 board.onmouseup = () => {
@@ -110,30 +110,31 @@ function clearBoard(){
 }
 
 function undo(){
-
 	clearBoard();
 
-	img = new Image();
-	img.src = savedFrames[currentIndex - 1]
-	currentIndex >= 0 ? currentIndex-- : currentIndex = currentIndex;
-
-	img.onload = () => {
-		drawImage(0, 0, img, board);
-		//ctx.drawImage(img, 0, 0);
+	if (currentIndex === 0){
+		return 0
 	}
 
+	data = savedFrames[currentIndex-1];
+
+	currentIndex >= 0 ? currentIndex-- : currentIndex = currentIndex;
+
+	drawData(0, 0, data, ctx);
 }
 
 function redo(){
-
 	clearBoard();
 
-	img = new Image();
-	img.src = savedFrames[currentIndex+1]
-
-	img.onload = () => {
-		drawImage(0,0,img,board)
+	if (currentIndex >= savedFrames.length){
+		return 0
 	}
+
+	data = savedFrames[currentIndex+1];
+
+	currentIndex <= savedFrames.length ? currentIndex++ : currentIndex = currentIndex;
+
+	drawData(0, 0, data, ctx);
 }
 
 //get mouseDown for all of the page
@@ -154,7 +155,7 @@ Array.from(document.querySelectorAll('.panel .slider')).forEach(e => {
 //define all pre-made tools
 const brush = {
 	
-	down : (e) => {ctx.moveTo(currX, currY); ctx.beginPath();},
+	down : (e) => {effectCtx.strokeStyle = tweaks.drawColor; ctx.moveTo(currX, currY); ctx.beginPath();},
 	move : (e) => {if(isDown){ctx.lineTo(currX, currY); ctx.stroke();} return},
 	up : () => {ctx.closePath();},
 	specialEffect : (e) => {effectCtx.beginPath(); effectCtx.arc(currX, currY, tweaks.drawWidth/2, 0, 2 * Math.PI); effectCtx.closePath(); effectCtx.fill();},
@@ -329,7 +330,9 @@ function saveData(ctx, settings){
 
 function drawData(x, y, data, cctx){
 
-	cctx.putImageData(data, x, y);
+	console.log(data)
+	imgData = new ImageData(data.data, 1200, 450);
+	cctx.putImageData(imgData, x, y);
 
 }
 
