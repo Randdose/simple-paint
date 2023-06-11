@@ -10,7 +10,12 @@
 		
 	</head>
 	
-	<body>
+	<body onload="(function(){
+		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+			document.querySelector('#right-side_bar').querySelector('.current_color-selector').value = '#ffffff';
+			console.log(document.querySelector('#right-side_bar').querySelector('.current_color-selector'))
+		}
+	})()">
 		<div id="bar_container">
 			<div id="left-bar" class="content bar">
 				<div class="button bar_button" id="import">
