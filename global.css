@@ -1,10 +1,19 @@
-:root{
+/*:root{
 	--main: #F77067;
 	--sec: #F79467;
 	--transp: rgba(247, 112, 103, 0.65);
 	--back: #2C3746;
 	--for: #EFF0F1;
 	--inact: #46505D;
+}*/
+
+:root{
+	--main: #7ECCBC;
+	--sec: #10BAA1;
+	--transp: rgba(126, 204, 188, 0.65);
+	--back: #1F1F1F;
+	--for: #DEDEDE;
+	--inact: #3D3D3D;
 }
 
 @media (prefers-color-scheme: dark){
